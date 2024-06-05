@@ -12,19 +12,13 @@ export class ProductSelectionComponent {
     bgImg: string = 'assets/images/bg-img.jpg';
     blur: boolean = false;
     
-    displayProduct: Product[] = [
+    displayProduct: Product[] = []
 
-    ]
-
-    availableProduct: Product[] = [
-
-    ]
+    availableProduct: Product[] = []
 
     processorList: any[] = [];
 
-    processorOption: any[] = [
-
-    ]
+    processorOption: any[] = []
 
     screenSizeOption: any[] = [
         {
@@ -99,6 +93,12 @@ export class ProductSelectionComponent {
         this.productService.getProcessingUnit().subscribe((res: any)=>{
             this.processorList = res;
         });
+    }
+
+    getMemory(processor:string){
+        this.productService.getStorageOption(processor).subscribe((res:any)=>{
+            this.processorOption = res;
+        })
     }
 
     filterProduct(){

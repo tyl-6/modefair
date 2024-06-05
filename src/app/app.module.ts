@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { GridComponent } from './page/grid/grid.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './state/order.reducer';
 
 const DECLARATION: any[] = [
     AppComponent,
@@ -18,7 +20,10 @@ const IMPORT: any[] =[
     BrowserModule,
     HomeModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({
+        cart: reducers
+    })
 ];
 
 @NgModule({

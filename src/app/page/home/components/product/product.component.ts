@@ -1,6 +1,8 @@
 import { Component, Input } from "@angular/core";
 import { Product } from "./product.model";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+
 
 @Component({
     selector: 'product-card',
@@ -28,7 +30,7 @@ export class ProductComponent {
     imgPath: string = 'assets/images/';
     
 
-    constructor(private router: Router){}
+    constructor(private router: Router, private store: Store){}
 
     ngOnInit(){
         this.selectedColor = this.product.availableColor?.at(0) || '';
@@ -70,8 +72,12 @@ export class ProductComponent {
     }
 
     getProductImg(product: Product){
-        product.img = this.imgPath + product.screenSize + '-' + this.selectedColor.toLocaleLowerCase() + '.jpg';
         return this.imgPath + product.screenSize + '-' + this.selectedColor.toLocaleLowerCase() + '.jpg';
+    }
+
+    goToOrder(product:any, color:string){
+        localStorage.setItem('selectedProduct', JSON.stringify(product));
+        this.router.navigate(['/order',product.screenSize,color,product.processor]);
     }
     
 }

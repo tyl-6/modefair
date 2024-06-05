@@ -37,7 +37,7 @@
                 <h5>Chip (Processor)</h5>
                 <a>Which chip is right for you? <i class="fa fa-plus"></i></a>
         
-                <ng-container *ngTemplateOutlet="optionsTemplate;context:{options:processorOptions, value: selectedProcessor, remark: processorRemark}"></ng-container>
+                <ng-container *ngTemplateOutlet="optionsTemplate;context:{type:'processor', options:processorOptions, value: selectedProcessor, remark: processorRemark}"></ng-container>
             </ng-container>
 
             <ng-container *ngIf="unifiedMemoryOptions.length > 0">
@@ -45,7 +45,7 @@
                 <h5>Storage</h5>
                 <a>How much storage is right for you? <i class="fa fa-plus"></i></a>
                 
-                <ng-container *ngTemplateOutlet="optionsTemplate;context:{options:unifiedMemoryOptions, value: selectedUnifiedMemory, remark: unifiedMemoryRemark}"></ng-container>
+                <ng-container *ngTemplateOutlet="optionsTemplate;context:{type: 'memory' ,options:unifiedMemoryOptions, value: selectedUnifiedMemory, remark: unifiedMemoryRemark}"></ng-container>
             </ng-container>
             
             <ng-container *ngIf="storageOptions.length > 0">
@@ -53,7 +53,7 @@
                 <h5>Storage</h5>
                 <a>How much storage is right for you? <i class="fa fa-plus"></i></a>
                 
-                <ng-container *ngTemplateOutlet="optionsTemplate;context:{options:storageOptions, value: selectedStorage, remark: storageRemark}"></ng-container>
+                <ng-container *ngTemplateOutlet="optionsTemplate;context:{type: 'storage' ,options:storageOptions, value: selectedStorage, remark: storageRemark}"></ng-container>
             </ng-container>
 
             <ng-container *ngIf="powerAdapterOptions.length > 0">
@@ -61,13 +61,13 @@
                 <h5>Power Adapter</h5>
                 <a>Which power adapter is right for you? <i class="fa fa-plus"></i></a>
                 
-                <ng-container *ngTemplateOutlet="optionsTemplate;context:{options:powerAdapterOptions, value: selectedPowerAdapter, remark: powerAdapterRemark}"></ng-container>
+                <ng-container *ngTemplateOutlet="optionsTemplate;context:{type: 'adapter', options:powerAdapterOptions, value: selectedPowerAdapter, remark: powerAdapterRemark}"></ng-container>
             </ng-container>
 
             <div *ngIf="keyboardOptions.length > 0">
                 <div>Keyboard Language</div>
                 <a>Learn more <i class="fa fa-plus"></i></a>
-                <select title="Keyboard Language" [(ngModel)]="keyboardSelection" name="Keyboard Language" aria-placeholder="Keyboard Language" class="border border-solid border-black rounded-lg">
+                <select title="Keyboard Language" [(ngModel)]="keyboardSelection" name="Keyboard Language" aria-placeholder="Keyboard Language" class="border border-solid border-black rounded-lg" (ngModelChange)="changeKeyboard($event)">
                     
                     <option *ngFor="let option of keyboardOptions"
                      [ngValue]="option.value" [label]="option.label">
@@ -88,7 +88,7 @@
     
     <div>
         <img [src]="getAppleTvPromoBlock()" class="absolute z-0 ">
-        <div class="grid grid-cols-3 text-white max-w-5xl absolute items-center">
+        <div class="grid grid-cols-3 text-white max-w-5xl relative items-center">
             <div class="items-center space-y-4 h-100 mt-10 ml-10">
                 <div><img [src]="applePlusLogo"></div>
                 <div class="font-bold text-3xl">
@@ -108,23 +108,41 @@
 
 </div>
 
-<ng-template #optionsTemplate let-options="options" let-value="value" let-remark="remark">
-    <div class="rounded-xl border border-solid border-black cursor-pointer" [ngClass]="{'border-2 border-blue-800':option.active }" *ngFor="let option of options">
+<ng-template #optionsTemplate let-options="options" let-value="value" let-remark="remark" let-type="type">
+    <div class="rounded-xl border border-solid border-black cursor-pointer p-4" [ngClass]="{'border-2 border-blue-800':option.active }" *ngFor="let option of options" (click)="changeSelection(type,option)">
         <span class="text-left">
             {{option.label}}
         </span>
-        <span class="right float-end">
-            {{getPriceDifference(option.priceDifference, value.priceDifference)}}
+        <span class="right float-end" *ngIf="getPriceDifference(option.priceDifference, value.priceDifference)!==0">
+            {{getPriceDifference(option.priceDifference, value.priceDifference) > 0 ? '+':'-'}} RM {{getPriceDifference(option.priceDifference, value.priceDifference) | number: '1.2-2'}}
         </span>
     </div>
 </ng-template>
 
-<footer></footer>
-<div class="sticky bottom-0">
-    <div class="max-w-5xl">
-        <div class="grid grid-cols-2">
-
-
+<div class=" bg-white " *ngIf=" storedProduct$ | async as item ">
+    <div class=" fixed bottom-0 w-full border border-collapse border-solid  bg-slate-50">
+        <div class="container md:w-[1024px] max-w-5xl">
+            <div class=" grid grid-cols-2 gap-2 py-5">
+                <div class="w-100">
+                    Delivery:<br>
+                    {{item.inStock? 'In Stock' : '4-6 business days'}}<br>
+                    Free Shipping<br>
+                    <a class="link hover:underline">Get delivery dates</a>
+                </div>
+                <div class="text-right w-100 justify-end space-x-3 flex align-top">
+                    <div class="inline-block">
+                        <p>RM {{item.price | number: '1.2-2'}} or<br>
+                        RM {{item.instalmentPerMonth | number: '1.2-2'}}/mo for {{item.instalmentPeriod}} mo.*</p>
+                        <a class="link">Explore monthly instalment options</a>
+                    </div>
+                    <div class="inline-block">
+                        <button class="w-full text-white p-2 rounded-lg bg-blue-500 hover:bg-blue-500/95">Add to Bag</button>
+                    </div>
+                    <div class="inline-block">
+                        <i></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

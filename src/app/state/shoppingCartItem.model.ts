@@ -11,5 +11,8 @@ export interface ShoppingCartItem {
     memoryPrice: number,
     storage: string,
     storagePrice: number,
-    total: number
+    total: number,
+    inStock: boolean,
+    color:string,
+    keyboard: string
 }

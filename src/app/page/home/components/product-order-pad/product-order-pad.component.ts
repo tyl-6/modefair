@@ -2,6 +2,11 @@ import { Component, Input } from "@angular/core";
 import { Product } from "../product/product.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProductService } from "../../../../service/product.service";
+import { Store } from "@ngrx/store";
+import { ShoppingCartItem } from "../../../../state/shoppingCartItem.model";
+import { Observable } from "rxjs";
+import { selectShoppingCartItem, selectShoppingCartState } from "../../../../state/order.selector";
+import { createOrder, keyboardChange, updateOrder } from "../../../../state/order.actions";
 
 @Component({
     selector: 'product-order-pad',
@@ -16,7 +21,7 @@ export class ProductOrderPadComponent {
     imgPath: string = 'assets/images/';
     applePlusLogo: string = this.imgPath+'apple-tv-plus-logo.png';
 
-    product!: string;
+    product!: Product;
 
     selectedProcessor: any;
     selectedStorage: any;
@@ -29,6 +34,8 @@ export class ProductOrderPadComponent {
     powerAdapterRemark!: string;
 
     selectedKeyboard: any;
+
+    storedProduct$: Observable<ShoppingCartItem>;
     
     unifiedMemoryOptions:any = [
         
@@ -47,14 +54,26 @@ export class ProductOrderPadComponent {
     ]
 
     keyboardSelection!: any ;
-    keyboardOptions: any = [
+    keyboardOptions: any = []
 
+    powerAdapterOption = [
+        {
+            value: '70W',
+            label: '70W USB-C Power Adapter',
+            active: false
+        },
+        {
+            value: '94W',
+            label: '96W USB-C Power Adapter',
+            active: false
+        }
     ]
 
     appleTvPromo:boolean = true;
     appleTvBackgroundImg: string ='apple-tv-plus-mac-argylle-202404.jpg';
 
-    constructor(private router: Router, private activedRoute: ActivatedRoute, private productService: ProductService){
+    constructor(private router: Router, private activedRoute: ActivatedRoute, private productService: ProductService, private store: Store<{state: ShoppingCartItem}>){
+        this.storedProduct$ = this.store.select(selectShoppingCartItem);
 
     }
 
@@ -73,9 +92,37 @@ export class ProductOrderPadComponent {
             this.processor = param['processor'];
         }
 
+        if(localStorage.length > 0){
+            this.product = JSON.parse(localStorage.getItem('selectedProduct')!);
+            localStorage.removeItem('selectedProduct');
+        }
+
         this.getProductStorageOption(this.processor);
         this.getKeyboardOption();
-        this.product = `${this.screensize}-inch ${this.model} - ${this.color}`;
+
+        this.setInitialCartItemState(this.product);
+    }
+
+    setInitialCartItemState(product: Product){
+        let newItem: ShoppingCartItem = {
+            model: "Macbook Pro",
+            price: product.retailPrice!,
+            instalmentPerMonth: 0,
+            instalmentPeriod: 24,
+            processor: product.processor!,
+            processorPrice: 0,
+            cpu: "8",
+            gpu: "16",
+            memory: "32",
+            memoryPrice: 1600,
+            storage: product.storage!,
+            storagePrice: 0,
+            total: 0,
+            inStock: true,
+            color: this.color,
+            keyboard: this.keyboardSelection
+        };
+        this.store.dispatch(createOrder({newState: newItem}));
     }
 
     getProductStorageOption(processor:string){        
@@ -121,6 +168,82 @@ export class ProductOrderPadComponent {
         });
     }
 
+    changeMemory(memory:any){
+        this.unifiedMemoryOptions.forEach((x:any) => {
+            if(memory.value === x.value){
+                x.active = true;
+            } else {
+                x.active = false;
+            }
+        });
+    }
+
+    changeStorage(storage:any){
+        console.log(storage);
+        console.log(this.storageOptions);
+        let priceDiff = 0;
+        this.storageOptions.forEach((x:any) => {
+            if(storage.value === x.value){
+                x.active = true;
+                priceDiff = x.priceDifference;
+            } else {
+                x.active = false;
+            }
+        });
+        let _product:any ;
+        this.storedProduct$.subscribe((_res)=>{
+            if(_res){
+                _product = _res;
+            }
+            
+        })
+        _product.storage = storage.value;
+        _product.storagePrice = priceDiff;
+        this.store.dispatch(updateOrder(_product));
+    }
+
+    changeAdapter(adapter:any){
+        this.powerAdapterOptions.forEach((x:any) => {
+            if(adapter.value === x.value){
+                x.active = true;
+            } else {
+                x.active = false;
+            }
+        });
+    }
+
+    changeKeyboard(val:any){
+        const keyboardVal = val;
+        let _product:any ;
+        this.storedProduct$.subscribe((_res)=>{
+            if(_res){
+                _product = _res;
+            }
+            
+        })
+        _product.keyboard = keyboardVal
+        this.store.dispatch(updateOrder(_product));
+    }
+
+    changeSelection(type:string,option:any){
+        switch(type){
+            case 'processor':
+                this.changeProcessor(option);
+                break;
+            case 'memory':
+                this.changeMemory(option);
+                break;
+            case 'storage':
+                this.changeStorage(option);
+                break;
+            case 'adapter':
+                this.changeProcessor(option);
+                break;
+            default:
+                break;
+        }
+    }
+
     filterProcessorOptions(){
         
     }
@@ -130,16 +253,17 @@ export class ProductOrderPadComponent {
     }
 
     getPriceDifference(optionPrice:number, price:number){
-        const differ = optionPrice - price;
+        const differ:number = optionPrice - price;
         if(differ == 0){
-            return '';
+            return 0;
         }
-
-        return `${differ > 0 ? '+': '-'} RM {{ ${differ} | number: '1.2-2'}}`;
+        return differ;
     }
 
     getAppleTvPromoBlock(){
         return `${this.imgPath+this.appleTvBackgroundImg}`;
     }
+
+    
 
 }
