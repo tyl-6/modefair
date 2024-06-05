@@ -14,5 +14,9 @@
     {
         "storage": "4TB SSD",
         "priceDifference": 4800
+    },
+    {
+        "storage": "8TB SSD",
+        "priceDifference": 9600
     }
 ]

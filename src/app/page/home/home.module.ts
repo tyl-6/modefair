@@ -6,6 +6,7 @@ import { CommonModule } from "@angular/common";
 import { ProductComponent } from "./components/product/product.component";
 import { ProductOrderPadComponent } from "./components/product-order-pad/product-order-pad.component";
 import { ProductSelectionComponent } from "./components/product-selection/product-selection.component";
+import { FormsModule } from "@angular/forms";
 
 const DECLARATION: any[] =[
     HomeComponent,
@@ -17,7 +18,8 @@ const DECLARATION: any[] =[
 
 const IMPORT: any[] =[
     HomeRoute,
-    CommonModule
+    CommonModule,
+    FormsModule
 ];
 
 @NgModule({

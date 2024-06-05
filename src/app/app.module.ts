@@ -6,6 +6,7 @@ import { HomeModule } from './page/home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { GridComponent } from './page/grid/grid.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 const DECLARATION: any[] = [
     AppComponent,
@@ -16,7 +17,8 @@ const IMPORT: any[] =[
     AppRouteModule,
     BrowserModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
 ];
 
 @NgModule({

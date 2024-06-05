@@ -11,15 +11,28 @@ export class ProductService {
 
     }
 
+    BASE_URL:string = '/assets/data';
+
     getProductList(){
-        return this.http.get("/assets/data/products.json") ;
+        return this.http.get(this.BASE_URL+"/products.json") ;
     }
 
     getProcessingUnit(){
-        return this.http.get("/assets/data/processingUnit.json")
+        return this.http.get(this.BASE_URL+"/processingUnit.json")
     }
 
     getGridItem(){
-        return this.http.get("/assets/data/grid-item.json");
+        return this.http.get(this.BASE_URL+"/grid-item.json");
+    }
+
+    getStorageOption(processor:string){
+        if(processor === "m3"){
+            return this.http.get(this.BASE_URL+"/storage-m3.json");
+        }
+        return this.http.get(this.BASE_URL+"/storage-m3-pro.json");
+    }
+
+    getKeyboardOption(){
+        return this.http.get(this.BASE_URL+"/keyboard-option.json");
     }
 }

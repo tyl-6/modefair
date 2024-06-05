@@ -1,5 +1,5 @@
 <div class="container max-w-5xl">
-    <div class="grid grid-flow-row grid-cols-2 gap-8">
+    <div class="grid grid-flow-row grid-cols-1 md:grid-cols-2 gap-8">
         <div class="sticky top-0 text-center">
             <div>
                 <img [src]="getProductImg()">
@@ -14,9 +14,110 @@
             </div>
         </div>
 
+        <div class="grid gap-y-3">
+            <h3>Customise your {{product}}</h3>
+            <div>
+                <ul>
+                    <li>
+    
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <h5>
+                Add a trade-in
+            </h5>
+            <p>
+                Get credit towards a new Mac when you trade in your eligible computer. Or recycle it for free.**
+            </p>
+            <a class="link hover:underline">Get started <i class="fa fa-plus"></i></a>
+            
+            <ng-container *ngIf="processorOptions.length > 0">
+                <hr>
+                <h5>Chip (Processor)</h5>
+                <a>Which chip is right for you? <i class="fa fa-plus"></i></a>
+        
+                <ng-container *ngTemplateOutlet="optionsTemplate;context:{options:processorOptions, value: selectedProcessor, remark: processorRemark}"></ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="unifiedMemoryOptions.length > 0">
+                <hr>
+                <h5>Storage</h5>
+                <a>How much storage is right for you? <i class="fa fa-plus"></i></a>
+                
+                <ng-container *ngTemplateOutlet="optionsTemplate;context:{options:unifiedMemoryOptions, value: selectedUnifiedMemory, remark: unifiedMemoryRemark}"></ng-container>
+            </ng-container>
+            
+            <ng-container *ngIf="storageOptions.length > 0">
+                <hr>
+                <h5>Storage</h5>
+                <a>How much storage is right for you? <i class="fa fa-plus"></i></a>
+                
+                <ng-container *ngTemplateOutlet="optionsTemplate;context:{options:storageOptions, value: selectedStorage, remark: storageRemark}"></ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="powerAdapterOptions.length > 0">
+                <hr>
+                <h5>Power Adapter</h5>
+                <a>Which power adapter is right for you? <i class="fa fa-plus"></i></a>
+                
+                <ng-container *ngTemplateOutlet="optionsTemplate;context:{options:powerAdapterOptions, value: selectedPowerAdapter, remark: powerAdapterRemark}"></ng-container>
+            </ng-container>
+
+            <div *ngIf="keyboardOptions.length > 0">
+                <div>Keyboard Language</div>
+                <a>Learn more <i class="fa fa-plus"></i></a>
+                <select title="Keyboard Language" [(ngModel)]="keyboardSelection" name="Keyboard Language" aria-placeholder="Keyboard Language" class="border border-solid border-black rounded-lg">
+                    
+                    <option *ngFor="let option of keyboardOptions"
+                     [ngValue]="option.value" [label]="option.label">
+                    </option>
+
+                </select>
+            </div>
+
+            <div class="px-2">
+                <div>Need a moment?</div>
+                <p>Keep all your selections by saving this device to Your Saves, then come back anytime and pick up right where you left off.</p>
+                <a class="link hover:underline">Save for later</a>
+            </div>
+
+        </div>
+
+    </div>
+    
+    <div>
+        <img [src]="getAppleTvPromoBlock()" class="absolute z-0 ">
+        <div class="grid grid-cols-3 text-white max-w-5xl absolute items-center">
+            <div class="items-center space-y-4 h-100 mt-10 ml-10">
+                <div><img [src]="applePlusLogo"></div>
+                <div class="font-bold text-3xl">
+                    Get 3 months of Apple TV+ free when you buy a Mac. footnote ***
+                </div>
+                <div class="grid grid-cols-2">
+                    <div>
+                        <a class=" text-blue-500 hover:underline">Try it free^</a>
+                    </div>
+                    <div>
+                        <a class=" text-blue-500 hover:underline">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
+
+<ng-template #optionsTemplate let-options="options" let-value="value" let-remark="remark">
+    <div class="rounded-xl border border-solid border-black cursor-pointer" [ngClass]="{'border-2 border-blue-800':option.active }" *ngFor="let option of options">
+        <span class="text-left">
+            {{option.label}}
+        </span>
+        <span class="right float-end">
+            {{getPriceDifference(option.priceDifference, value.priceDifference)}}
+        </span>
+    </div>
+</ng-template>
 
 <footer></footer>
 <div class="sticky bottom-0">

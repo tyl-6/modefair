@@ -1,0 +1,22 @@
+[
+    {
+        "value":"magicKeyboard-US",
+        "label":"Backlit Magic Keyboard with Touch ID - US English"
+    },
+    {
+        "value":"magicKeyboard-Pinyin",
+        "label":"Backlit Magic Keyboard with Touch ID - Chinese (Pinyin)"
+    },
+    {
+        "value":"magicKeyboard-Zhuyin",
+        "label":"Backlit Magic Keyboard with Touch ID - Chinese (Zhuyin)"
+    },
+    {
+        "value":"magicKeyboard-Arabic",
+        "label":"Backlit Magic Keyboard with Touch ID - Arabic"
+    },
+    {
+        "value":"magicKeyboard-Jp",
+        "label":"Backlit Magic Keyboard with Touch ID - Japanese"
+    }
+]
