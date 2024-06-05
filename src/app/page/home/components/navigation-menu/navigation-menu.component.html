@@ -1,0 +1,61 @@
+<div (mouseleave)="hideDropDownMenu($event)">
+    <nav class="flex justify-center items-center max-w-5xl container" >
+        <div >
+            <!-- <img class="w-8" src="assets/images/applecare-hero-bb-201706.jpg"> -->
+            <i class="fa fa-apple w-8"></i>
+        </div>
+        <!--md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[9%] w-full flex items-center px-5-->
+        <div class="
+        duration-500 md:static absolute bg-white md:min-h-fit min-h-full left-0 top-[-100%] md:w-auto w-full flex md:items-center px-5" [ngClass]="{'top-0 items-start z-20':menuToggled, 'top-[-100%]': !menuToggled}">
+            <ul class="flex md:flex-row flex-col md:items-center md:gap-[2vw] gap-4 w-full ">
+                <li [ngClass]="{'hidden':!menuToggled}" class="text-right z-10">
+                    <span (click)="toggleMenu()">close</span>
+                </li>
+                <li class="md:text-center" *ngFor="let menu of menus">
+                    <a [routerLink]="menu?.url" class="text-sm" (mouseover)="showDropDownMenu(menu?.children, $event)">{{menu?.title}}</a>
+                    <div [ngClass]="{'h-max':showDropDown, 'h-0':!showDropDown}" class="w-full left-0 absolute z-10 bg-white text-left duration-500 transition-all ease-linear">
+                        <div class="container max-w-5xl">
+                            <div *ngFor="let submenu of menuChildren">
+                                {{submenu?.subTitle}}
+                                <ul *ngIf="submenu?.subItems != 0">
+                                    <li *ngFor="let item of submenu?.subItems">
+                                        {{item?.title}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="flex gap-[2vw] items-center">
+                <li>
+                    <span>search</span>
+                </li>
+                <li>
+                    <span>cart</span>
+                </li>
+                <li class="md:hidden">
+                    <span><i id="menu-button" (click)="toggleMenu()">menu</i></span>
+                </li>
+            </ul>
+        </div>
+        
+    </nav>
+    <div class="flex justify-between max-w-5xl container">
+        <!-- <img [ngClass]="{'blur': blur}" [src]="bgImg"> -->
+        <div class="text-left inline">
+            <strong>MacBook Pro</strong>
+        </div>
+        <div class="text-right flex justify-end inline gap-6">
+            <a class="text-none hover:text-medium">Overview</a>
+            <a class="text-none hover:text-medium">macOs</a>
+            <a class="text-none hover:text-medium">Compare</a>
+        </div>
+    </div>
+    <hr>
+</div>
+
+
+

@@ -1,0 +1,123 @@
+[
+    {
+        "screenSize": "14",
+        "processor" :"m3",
+        "availableColor" : ["spaceGrey","silver"] ,
+        "cpu" :"8",
+        "gpu" :"10",
+        "unifiedMemory" :"8GB",
+        "storage" :"512GB SSD",
+        "description" :"string",
+        "retailPrice" : 7499.00,
+        "stock": 10
+    },
+    {
+        "screenSize": "14",
+        "processor" :"m3",
+        "availableColor" : ["spaceGrey","silver"] ,
+        "cpu" :"8",
+        "gpu" :"10",
+        "unifiedMemory" :"8GB",
+        "storage" :"1TB SSD",
+        "description" :"string",
+        "retailPrice" : 8299.00,
+        "stock": 10
+    },
+    {
+        "screenSize": "14",
+        "processor" :"m3",
+        "availableColor" : ["spaceGrey","silver"] ,
+        "cpu" :"8",
+        "gpu" :"10",
+        "unifiedMemory" :"16GB",
+        "storage" :"1TB SSD",
+        "description" :"string",
+        "retailPrice" : 9099.00,
+        "stock": 10
+    },
+    {
+        "screenSize": "14",
+        "processor" :"m3pro",
+        "availableColor" : ["spaceGrey","silver"] ,
+        "cpu" :"11",
+        "gpu" :"14",
+        "unifiedMemory" :"18GB",
+        "storage" :"512GB SSD",
+        "description" :"string",
+        "retailPrice" : 9999.00,
+        "stock": 10
+    },
+    {
+        "screenSize": "14",
+        "processor" :"m3pro",
+        "availableColor" : ["spaceGrey","silver"] ,
+        "cpu" :"12",
+        "gpu" :"18",
+        "unifiedMemory" :"18GB",
+        "storage" :"1TB SSD",
+        "description" :"string",
+        "retailPrice" : 11599.00,
+        "stock": 10
+    },
+    {
+        "screenSize": "14",
+        "processor" :"m3max",
+        "availableColor" : ["spaceGrey","silver"] ,
+        "cpu" :"14",
+        "gpu" :"30",
+        "unifiedMemory" :"36GB",
+        "storage" :"1TB SSD",
+        "description" :"string",
+        "retailPrice" : 14799.00,
+        "stock": 10
+    },
+    {
+        "screenSize": "16",
+        "processor" :"m3pro",
+        "availableColor" : ["spaceBlack","silver"] ,
+        "cpu" :"12",
+        "gpu" :"18",
+        "unifiedMemory" :"18GB",
+        "storage" :"512GB SSD",
+        "description" :"string",
+        "retailPrice" : 11999.00,
+        "stock": 10
+    },
+    {
+        "screenSize": "16",
+        "processor" :"m3pro",
+        "availableColor" : ["spaceBlack","silver"] ,
+        "cpu" :"12",
+        "gpu" :"18",
+        "unifiedMemory" :"36GB",
+        "storage" :"512GB SSD",
+        "description" :"string",
+        "retailPrice" : 13599.00,
+        "stock": 10
+    },
+    {
+        "screenSize": "16",
+        "processor" :"m3max",
+        "availableColor" : ["spaceBlack","silver"] ,
+        "cpu" :"14",
+        "gpu" :"30",
+        "unifiedMemory" :"36GB",
+        "storage" :"1TB SSD",
+        "description" :"string",
+        "retailPrice" : 15999.00,
+        "stock": 10
+    },
+    {
+        "screenSize": "16",
+        "processor" :"m3max",
+        "availableColor" : ["spaceBlack","silver"] ,
+        "cpu" :"16",
+        "gpu" :"40",
+        "unifiedMemory" :"48GB",
+        "storage" :"1TB SSD",
+        "description" :"string",
+        "retailPrice" : 17999.00,
+        "stock": 10
+    }
+    
+]

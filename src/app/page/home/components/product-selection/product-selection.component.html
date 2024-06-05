@@ -1,0 +1,104 @@
+<div id="banner" class="p-3">
+    <div class="container px-3 justify-center flex  md:min-w-5xl">
+        <span>Pay 0% interest for up to 24 months. Terms apply.<sup>◊◊</sup> <a class="link hover:underline" href="">Learn more <i class="fa fa-angle-right"></i></a></span>
+    </div>
+</div>
+
+<div class="container px-3 md:min-w-5xl">
+    <div class="justify-center flex">
+        <span class="text-5xl font-sans">
+            <strong>Choose your new MacBook Pro.</strong>
+        </span>
+    </div>
+    <div class="justify-center flex">
+        <div><i style='font-size:24px' class='far'>&#xf086;</i></div>
+        <div><span class="text-xl">Have questions about buying a Mac?</span></div>
+    </div>
+    <div class="justify-center flex">
+        <a class="hover:underline text-xl text-blue-800">Chat with a Mac Specialist</a>
+    </div>
+</div>
+
+<div class=" sticky xl: top-0 bg-white mx-auto opacity-[95%] z-10">
+        <div id="screen-size" class="flex justify-center py-5 screen-size">
+            <button class="rounded-l-xl py-5 px-6 text-xl border border-solid border-black" [ngClass]="activeScreenSizeSelection=='14'? 'border-2 border-blue-800': '' " (click)="onChangeScreenSizeSelection('14')">14-inch</button>
+            <button class="rounded-r-xl py-5 px-6 text-xl border border-solid border-black" [ngClass]="activeScreenSizeSelection=='16'? 'border-2 border-blue-800': '' " (click)="onChangeScreenSizeSelection('16')">16-inch</button>
+        </div>
+</div>
+
+<div class="container px-3 max-w-5xl">
+    <div class="">
+        <div class="justify-center flex py-5">
+            <div>Filter by chip:</div>
+        </div>
+        <div class="flex justify-center gap-2">
+            <button class="rounded-3xl  py-2 px-5" [ngClass]="activeProcessorSelection=='all'? 'bg-black text-white': 'bg-slate-200' " (click)="onChangeProcessorSelection('all')">All</button>
+            <button *ngFor="let option of processorOption" class="rounded-3xl  py-2 px-5" [ngClass]="activeProcessorSelection==option?.key? 'bg-black text-white': 'bg-slate-200' " (click)="onChangeProcessorSelection(option?.key)">{{option?.value}}</button>
+        </div>
+    </div>
+</div>
+
+<!--product card-->
+<div class="container px-3 max-w-5xl">
+    <div class=" grid gap-6 grid-cols-1 md:grid-cols-3 container">
+        <div *ngFor="let product of displayProduct" class="bg-slate-50 h-full rounded-2xl">
+            <product-card [product]="product"></product-card>
+        </div>
+    </div>
+</div>
+
+<div class="container max-w-5xl py-10">
+    <div class="w-full flex justify-center">
+        <span class="text-4xl font-sans font-medium">
+            What's in the Box
+        </span>
+    </div>
+    <div class="flex justify-center items-center bg-slate-50">
+        <div class=" flex flex-col justify-center">
+           <div> <img class="object-fit" [src]="imgPath+(activeScreenSizeSelection=='16'? 'mbp16-witb-spaceblack-202310.jpg':'mbp14-witb-silver-202310.jpg') "></div>
+            <div class="w-full text-center">{{(activeScreenSizeSelection=='16'? '16-inch MacBook Pro':'14-inch MacBook Pro')}}</div>
+        </div>
+        <div class=" flex-1">
+            <div><img class="object-contain" [src]="imgPath+(activeScreenSizeSelection=='16'? 'mbp-witb-usb-c-magsafe-cable-spaceblack-202310.jpg':'mbp-witb-usb-c-magsafe-cable-silver-202310.jpg') "></div>
+            <div class="text-center">USB-C to MagSafe 3 Cable (2m)</div>
+        </div>
+        <div class=" flex-2 flex flex-col justify-center">
+            <div><img class="object-fit" [src]="imgPath+'mbp-witb-70w-adapter-202310_GEO_MY.jpg'"></div>
+            <div class="teext-center w-full">150W USB-C Power Adapter</div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container max-w-5xl bg-slate-50 space-y-3">
+    <div class="w-full text-center text-3xl font-sans font-medium">What to consider when choosing your MacBook Pro.</div>
+    <div class="w-full text-center text-2xl">Configure your laptop on the next step.</div>
+
+    <div class="grid grid-cols-1 px-3 lg:grid-cols-4 gap-4 pt-5">
+        <div *ngFor="let processor of processorList">
+            <img class="w-12 p-1" [src]="getProductImg(processor.item)">
+            <div class="font-medium py-4">{{processor.name}}</div>
+            <p class="text-sm">{{processor.desc}}</p>
+            <div class="py-3">
+                <ul class="list-disc list-inside  text-sm">
+                    <li *ngFor="let feature of processor.features">
+                        {{feature}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="pt-10">
+        <p class="w-full text-center">Have questions about buying a Mac? <a class="link hover:underline text-blue-800">Chat with a Mac Specialist.</a></p>
+    </div>
+</div>
+
+<div class="container max-w-5xl bg-slate-50">
+    <div class="text-3xl font-medium">
+        Compare Mac models
+    </div>
+    <p><a [href]="">Choose the best Mac for you <img class="inline-block w-4" [src]="imgPath+'up-right.png'"></a></p>
+
+
+</div>

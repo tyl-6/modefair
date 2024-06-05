@@ -1,0 +1,26 @@
+[
+    {
+        "memory": 18,
+        "priceDifference": 0
+    },
+    {
+        "memory": 36,
+        "priceDifference": 1600
+    },
+    {
+        "memory": 48,
+        "priceDifference": 2400
+    },
+    {
+        "memory": 64,
+        "priceDifference": 3200
+    },
+    {
+        "memory": 96,
+        "priceDifference": 4800
+    },
+    {
+        "memory": 128,
+        "priceDifference": 6400
+    }
+]

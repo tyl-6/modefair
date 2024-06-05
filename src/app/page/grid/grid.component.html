@@ -1,0 +1,79 @@
+<div class="container w-[1024px] pt-[10%] "> 
+
+    <!-- <div class="overflow-auto w-full h-[40vh]">
+        <div class="table w-full border-2 border-solid relative">
+            <div class="table-header-group p-3 border-4 border-collapse border-black sticky top-0 bg-white">
+                <div class="table-row border border-collapse pt-10">
+                    <div class="table-cell border border-collapse"></div>
+                    <div class="table-cell border border-collapse">Product</div>
+                    <div class="table-cell border border-collapse">ID</div>
+                    <div class="table-cell border border-collapse">Unit Price</div>
+                    <div class="table-cell border border-collapse">Qty Per Unit</div>
+                </div>
+            </div>
+            <div class="table-row-group border-2 border-collapse" >
+                <ng-container *ngFor="let item of gridItem, let i = index"><ng-container *ngTemplateOutlet="rowTemplate;context:{item:item, index: i}">
+                </ng-container></ng-container>
+            </div>
+        </div>
+    </div> -->
+    <div class="h-[50vh] overflow-auto">
+        <table class="w-full">
+            <thead class="relative">
+                <tr class="sticky top-0 bg-white">
+                    <td class=" border border-collapse"></td>
+                    <td class=" border border-collapse">Product</td>
+                    <td class=" border border-collapse">ID</td>
+                    <td class=" border border-collapse">Unit Price</td>
+                    <td class=" border border-collapse">Qty Per Unit</td>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let item of gridItem, let i = index"><ng-container *ngTemplateOutlet="tableRowTemplate;context:{item:item, index: i}">
+                </ng-container></ng-container>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- <ng-template #rowTemplate let-item="item" let-index="index">
+    <div class="table-row text-left border-2 border-collapse" [ngClass]=" (index%2)==0 ? 'bg-white': 'bg-zinc-200' ">
+        <div class="table-cell border border-b-0"><i (click)="item.active = !item.active" [ngClass]=" item.active ? 'fa fa-minus': 'fa fa-plus' "></i></div>
+        <div class="table-cell border border-b-0">{{item.name}}</div>
+        <div class="table-cell border border-b-0">{{item.id}}</div>
+        <div class="table-cell border border-b-0">{{item.unitPrice}}</div>
+        <div class="table-cell border border-b-0">{{item.qtyPerUnit}}</div>
+    </div>
+    <div [ngClass]="{ 'hidden': !item.active, 'bg-white': (index % 2) === 0, 'bg-zinc-200': (index % 2) !== 0 }" class=" table-cell col-start-2 text-left border-2 border-collapse">
+        
+            <div ><strong>In Stock:</strong> {{item.inStock}} units</div>
+            <div ><strong>On Order:</strong> {{item.onOrder}} units</div>
+            <div ><strong>Reorder Level:</strong> {{item.reorderLvl}} units</div>
+            <div ><strong>Discontinued:</strong> {{item.discontinued? 'Discontinued': ''}} </div>
+            <div ><strong>Category:</strong> {{item.cat.catName}} {{(item.cat.catDesc !=null && item.cat.catDesc != undefined) ? ('- '+item.cat.catDesc): ''}} </div>
+    </div>
+</ng-template> -->
+
+
+
+<ng-template #tableRowTemplate let-item="item" let-index="index">
+    <tr class=" text-left border-2 border-collapse hover:bg-zinc-200" [ngClass]=" (index%2)==0 ? 'bg-white': 'bg-zinc-200' ">
+        <td class=" border border-b-0"><i (click)="item.active = !item.active" [ngClass]=" item.active ? 'fa fa-minus': 'fa fa-plus' "></i></td>
+        <td class=" border border-b-0">{{item.name}}</td>
+        <td class=" border border-b-0">{{item.id}}</td>
+        <td class=" border border-b-0">{{item.unitPrice}}</td>
+        <td class=" border border-b-0">{{item.qtyPerUnit}}</td>
+    </tr>
+    <tr [ngClass]="{ 'hidden': !item.active, 'bg-white': (index % 2) === 0, 'bg-zinc-200': (index % 2) !== 0 }" class=" text-left border-2 border-collapse hover:bg-zinc-200">
+        <td></td>
+        <td colspan="4">
+            <div ><strong>In Stock:</strong> {{item.inStock}} units</div>
+            <div ><strong>On Order:</strong> {{item.onOrder}} units</div>
+            <div ><strong>Reorder Level:</strong> {{item.reorderLvl}} units</div>
+            <div ><strong>Discontinued:</strong> {{item.discontinued? 'Discontinued': ''}} </div>
+            <div ><strong>Category:</strong> {{item.cat.catName}} {{(item.cat.catDesc !=null && item.cat.catDesc != undefined) ? ('- '+item.cat.catDesc): ''}} </div>
+        </td>
+    </tr>
+</ng-template>
+

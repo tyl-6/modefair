@@ -1,0 +1,22 @@
+[
+    {
+        "storage": "512GB SSD",
+        "priceDifference": 0
+    },
+    {
+        "storage": "1TB SSD",
+        "priceDifference": 800
+    },
+    {
+        "storage": "2TB SSD",
+        "priceDifference": 2400
+    },
+    {
+        "storage": "4TB SSD",
+        "priceDifference": 4800
+    },
+    {
+        "storage": "8TB SSD",
+        "priceDifference": 9600
+    }
+]

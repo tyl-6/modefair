@@ -1,0 +1,7 @@
+
+.dropdown-wrapper {
+    .dropdown-menu {
+        overflow: hidden;
+        transition: all 1s;
+    }
+}

@@ -1,0 +1,14 @@
+[
+    {
+        "memory": 8,
+        "priceDifference": 0
+    },
+    {
+        "memory": 16,
+        "priceDifference": 800
+    },
+    {
+        "memory": 24,
+        "priceDifference": 1600
+    }
+]
